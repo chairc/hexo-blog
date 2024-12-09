@@ -1,11 +1,15 @@
 ---
 title: Pytorch复现经典扩散模型DDPM&DDIM&PLMS及分布式训练应用
 date: 2024-11-23 14:04:57
-tags:
+description: 当前，生成式人工智能（AIGC）已被越来越广泛应用在工业、动漫业、设计业等诸多场景。我们都知道现阶段主流的生成模型如生成对抗网络（GAN）、自分编码器（VAE）、流模型（Flow-based Models）和扩散模型（Diffusion Models）。而扩散模型中还分为概率扩散模型，噪声条件评分网络和去噪概率模型。去噪概率模型中较为经典的就是DDPM。
+categories: 
+- [人工智能, 计算机视觉, 扩散模型]
+- [Python项目应用]
+tags: [扩散模型, DDPM, DDIM, Python]
 ---
 
 # 0 前言
-当前，生成式人工智能（AIGC）已被越来越广泛应用在工业、动漫业、设计业等诸多场景。我们都知道现阶段主流的生成模型如生成对抗网络（GAN）、自分编码器（VAE）、流模型（Flow-based Models）和扩散模型（Diffusion Models）。而扩散模型中还分为概率扩散模型，噪声条件评分网络和去噪概率模型。去噪概率模型中较为经典的就是DDPM（**[Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239)**）。
+当前，生成式人工智能（AIGC）已被越来越广泛应用在工业、动漫业、设计业等诸多场景。我们都知道现阶段主流的生成模型如生成对抗网络（GAN）、自分编码器（VAE）、流模型（Flow-based Models）和扩散模型（Diffusion Models）。而扩散模型中还分为概率扩散模型，噪声条件评分网络和去噪概率模型。去噪概率模型中较为经典的就是DDPM（[**Denoising Diffusion Probabilistic Models**](https://arxiv.org/abs/2006.11239)）。
 **本文章和GitHub仓库，如有问题请在此仓库提交issue，如果你认为我的项目有意思请给我点一颗⭐⭐⭐Star⭐⭐⭐吧。本文持续更新**，以GitHub为准嗷~
 代码最新更新仓库：[https://github.com/chairc/Integrated-Design-Diffusion-Model](https://github.com/chairc/Integrated-Design-Diffusion-Model)
 代码最新问题总结：[https://github.com/chairc/Integrated-Design-Diffusion-Model/issues/9](https://github.com/chairc/Integrated-Design-Diffusion-Model/issues/9)
@@ -439,61 +443,19 @@ class Diffusion(BaseDiffusion):
 我们在以下4个数据集做了训练，采样器为`DDPM`，图片尺寸均为`64*64`，分别是`cifar10`，`NEUDET`，`NRSD-MN`和`Animate Face`。结果如下图所示：
 **cifar10**
 
-![cifar_244_ema](/cifar_244_ema.jpg)
-
-![cifar_294_ema](/cifar_294_ema.jpg)
+![cifar_244_ema](/cifar_244_ema.jpg)![cifar_294_ema](/cifar_294_ema.jpg)
 
 **NEUDET**
 
-![neudet_270_ema](/neudet_270_ema.jpg)
-
-![neudet_276_ema](/neudet_276_ema.jpg)
-
-![neudet_290_ema](/neudet_290_ema.jpg)
-
-![neudet_298_ema](/neudet_298_ema.jpg)
-
-![neudet_240_ema](/neudet_240_ema.jpg)
-
-![neudet_244_ema](/neudet_244_ema.jpg)
-
-![neudet_265_ema](/neudet_265_ema.jpg)
+![neudet_270_ema](/neudet_270_ema.jpg)![neudet_276_ema](/neudet_276_ema.jpg)![neudet_290_ema](/neudet_290_ema.jpg)![neudet_298_ema](/neudet_298_ema.jpg)![neudet_240_ema](/neudet_240_ema.jpg)![neudet_244_ema](/neudet_244_ema.jpg)![neudet_265_ema](/neudet_265_ema.jpg)
 
 **NRSD**
 
-![nrsd_180_ema](/nrsd_180_ema.jpg)
-
-![nrsd_188_ema](/nrsd_188_ema.jpg)
-
-![nrsd_194_ema](/nrsd_194_ema.jpg)
-
-![nrsd_203_ema](/nrsd_203_ema.jpg)
-
-![nrsd_210_ema](/nrsd_210_ema.jpg)
-
-![nrsd_217_ema](/nrsd_217_ema.jpg)
-
-![nrsd_218_ema](/nrsd_218_ema.jpg)
-
-![nrsd_248_ema](/nrsd_248_ema.jpg)
-
-![nrsd_276_ema](/nrsd_276_ema.jpg)
-
-![nrsd_285_ema](/nrsd_285_ema.jpg)
-
-![nrsd_298_ema](/nrsd_298_ema.jpg)
+![nrsd_180_ema](/nrsd_180_ema.jpg)![nrsd_188_ema](/nrsd_188_ema.jpg)![nrsd_194_ema](/nrsd_194_ema.jpg)![nrsd_203_ema](/nrsd_203_ema.jpg)![nrsd_210_ema](/nrsd_210_ema.jpg)![nrsd_217_ema](/nrsd_217_ema.jpg)![nrsd_218_ema](/nrsd_218_ema.jpg)![nrsd_248_ema](/nrsd_248_ema.jpg)![nrsd_276_ema](/nrsd_276_ema.jpg)![nrsd_285_ema](/nrsd_285_ema.jpg)![nrsd_298_ema](/nrsd_298_ema.jpg)
 
 **Animate Face（整活生成)**
 
-![animate_face_488_ema](/animate_face_488_ema.jpg)
-
-![animate_face_497_ema](/animate_face_497_ema.jpg)
-
-![animate_face_499_ema](/animate_face_499_ema.jpg)
-
-![animate_face_428_ema](/animate_face_428_ema.jpg)
-
-![animate_face_459_ema](/animate_face_459_ema.jpg)
+![animate_face_488_ema](/animate_face_488_ema.jpg)![animate_face_497_ema](/animate_face_497_ema.jpg)![animate_face_499_ema](/animate_face_499_ema.jpg)![animate_face_428_ema](/animate_face_428_ema.jpg)![animate_face_459_ema](/animate_face_459_ema.jpg)
 
 
 
