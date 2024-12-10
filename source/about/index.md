@@ -95,7 +95,7 @@ Hao H, Zhu S, Yi C, **Chen Y**, et al.
 
 - AMFF-YOLOX: Towards an Attention Mechanism and Multiple Feature Fusion Based on YOLOX for Industrial Defect Detection
 **Chen Y**, Tang Y, Hao H, Zhou J, et al.
-Electronics, 2023, 12(7): 1662. [[**website**](https://www.mdpi.com/2079-9292/12/7/1662)] [[**pdf**](paper/AMFF-YOLOX_Towards_an_Attention_Mechanism_and_Multiple_Feature_Fusion_Based_on_YOLOX_for_Industrial_Defect_Detection.pdf)]
+Electronics, 2023, 12(7): 1662. [[**website**](https://www.mdpi.com/2079-9292/12/7/1662)] [[**pdf**](paper/AMFF-YOLOX_Towards_an_Attention_Mechanism_and_Multiple_Feature_Fusion_Based_on_YOLOX_for_Industrial_Defect_Detection.pdf)] [[**code**]](https://github.com/chairc/NRSD-MN-relabel/tree/main/code)
 
 - Novelty Detection and Fault Diagnosis Method for Bearing Faults Based on the Hybrid Deep Autoencoder Network
 Zhao Y, Hao H, **Chen Y**, et al.
@@ -112,11 +112,11 @@ Yuan H, Tang Y, Hao H, Zhao Y, Zhang Y, **Chen Y**.
 Computational Intelligence and Neuroscience, 2022, 2022. [[**website**](https://www.hindawi.com/journals/cin/2022/6464516/)] [[**pdf**](paper/Intelligent_Detection_Method_of_Gearbox_Based_on_Adaptive_Hierarchical_Clustering_and_Subset.pdf)]
 
 - Intelligent monitoring and control system and control method of intelligent water meter
-Yuan H, Hao H, Zhao Y, Zhang Y,**Chen Y**.
+Yuan H, Hao H, Zhao Y, Zhang Y, **Chen Y**.
 2022 IEEE 6th Advanced Information Technology, Electronic and Automation Control Conference (IAEAC). IEEE, 2022: 226-229. [[**website**](https://ieeexplore.ieee.org/document/9929669/)] [[**pdf**](paper/Intelligent_monitoring_and_control_system_and_control_method_of_intelligent_water_meter.pdf)]
 
 - Method for intelligently identifying underground safety accidents based on fully connected neural network
-Yuan H, Hao H, Zhao Y, Zhang Y,**Chen Y**.
+Yuan H, Hao H, Zhao Y, Zhang Y, **Chen Y**.
 2022 IEEE 6th Information Technology and Mechatronics Engineering Conference (ITOEC). IEEE, 2022, 6: 367-370. [[**website**](https://ieeexplore.ieee.org/document/9734567/)] [[**pdf**](paper/Method_for_intelligently_identifying_underground_safety_accidents_based_on_fully_connected_neural_network.pdf)]
 
 ## 专利
