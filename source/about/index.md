@@ -95,7 +95,7 @@ Hao H, Zhu S, Yi C, **Chen Y**, et al.
 
 - AMFF-YOLOX: Towards an Attention Mechanism and Multiple Feature Fusion Based on YOLOX for Industrial Defect Detection
 **Chen Y**, Tang Y, Hao H, Zhou J, et al.
-Electronics, 2023, 12(7): 1662. [[**website**](https://www.mdpi.com/2079-9292/12/7/1662)] [[**pdf**](paper/AMFF-YOLOX_Towards_an_Attention_Mechanism_and_Multiple_Feature_Fusion_Based_on_YOLOX_for_Industrial_Defect_Detection.pdf)] [[**code**]](https://github.com/chairc/NRSD-MN-relabel/tree/main/code)
+Electronics, 2023, 12(7): 1662. [[**website**](https://www.mdpi.com/2079-9292/12/7/1662)] [[**pdf**](paper/AMFF-YOLOX_Towards_an_Attention_Mechanism_and_Multiple_Feature_Fusion_Based_on_YOLOX_for_Industrial_Defect_Detection.pdf)] [[**code**](https://github.com/chairc/NRSD-MN-relabel/tree/main/code)]
 
 - Novelty Detection and Fault Diagnosis Method for Bearing Faults Based on the Hybrid Deep Autoencoder Network
 Zhao Y, Hao H, **Chen Y**, et al.
