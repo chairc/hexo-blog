@@ -6,6 +6,7 @@ categories:
 - [人工智能, 计算机视觉, 检测模型]
 - [Python项目应用]
 tags: [检测模型, YOLO, Python]
+math: true
 ---
 
 # 0 介绍
