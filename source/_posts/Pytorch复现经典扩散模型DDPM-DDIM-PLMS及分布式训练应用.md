@@ -1,6 +1,7 @@
 ---
 title: Pytorch复现经典扩散模型DDPM&DDIM&PLMS及分布式训练应用
 date: 2024-11-23 14:04:57
+hide: true
 description: 当前，生成式人工智能（AIGC）已被越来越广泛应用在工业、动漫业、设计业等诸多场景。我们都知道现阶段主流的生成模型如生成对抗网络（GAN）、自分编码器（VAE）、流模型（Flow-based Models）和扩散模型（Diffusion Models）。而扩散模型中还分为概率扩散模型，噪声条件评分网络和去噪概率模型。去噪概率模型中较为经典的就是DDPM。
 categories: 
 - [人工智能, 计算机视觉, 扩散模型]
