@@ -11,51 +11,77 @@ date: 2024-11-22 14:47:46
 ### 研发工程师，硕士，开源作者
 
 **现就职于**：山东港口陆海国际物流集团有限公司
+
 **曾学习于**：算力互联网与信息安全教育部重点实验室，[山东省计算中心](http://www.scsc.cn/)（[国家超级计算济南中心](https://www.nsccjn.cn/)），[齐鲁工业大学（山东省科学院）](https://www.qlu.edu.cn/)
+
 **担任审稿人**：The Journal of Supercomputing、Pattern Analysis and Applications、Journal of Real-Time Image Processing
+
 **电子邮箱**：chenyu1998424 [at] gmail [dot] com / chairc1998 [at] 163 [dot] com
+
 **位置**：中国山东省济南市
+
 **CSDN博客**: [ChairC]("https://blog.csdn.net/qq_43226466)
+
 **学术ORCID**: [0000-0002-2026-8018](https://orcid.org/0000-0002-2026-8018)
 
 ## 项目经历
 
 ### 2024
 - 2024.11 - 至今 **AI保函在线识别** (开发语言：Python)
-**项目描述**：该系统为网络AI保函在线识别模型。
-**技术栈**：Pytorch + Web
-**项目内容**：采用PaddleOCR与PaddleNLP的KIE匹配技术对海铁保函的关键信息进行提取与识别，提取准确率在97%以上。
+
+    **项目描述**：该系统为网络AI保函在线识别模型。
+
+    **技术栈**：Pytorch + Web
+
+    **项目内容**：采用PaddleOCR与PaddleNLP的KIE匹配技术对海铁保函的关键信息进行提取与识别，提取准确率在97%以上。
 
 ### 2023
 
 - 2023.06 - 至今 **IDDM分布式缺陷生成模型** (横向项目/开发语言：Python)
-**项目描述**：该系统为开源分布式深度学习图像生成模型（AIGC）。
-**技术栈**：Pytorch + 分布式
-**项目内容**：IDDM分布式缺陷生成模型根据DDPM和DDIM算法提供无重复的工业缺陷图像。模型采用DDP分布式训练技术对在6张RTX6000显卡进行通讯，实现大显存多显卡训练。
-**项目链接**：[https://github.com/chairc/Industrial-Defect-Diffusion-Model](https://github.com/chairc/Industrial-Defect-Diffusion-Model)
+
+    **项目描述**：该系统为开源分布式深度学习图像生成模型（AIGC）。
+
+    **技术栈**：Pytorch + 分布式
+
+    **项目内容**：IDDM分布式缺陷生成模型根据DDPM和DDIM算法提供无重复的工业缺陷图像。模型采用DDP分布式训练技术对在6张RTX6000显卡进行通讯，实现大显存多显卡训练。
+
+    **项目链接**：[https://github.com/chairc/Industrial-Defect-Diffusion-Model](https://github.com/chairc/Industrial-Defect-Diffusion-Model)
 
 - 2023.06 - 2024.06 **木材缺陷在线检测平台** (横向项目/开发语言：Java、Python)
-**项目描述**：山东省重大科技创新工程。
-**技术栈**：SpringBoot + MySQL + MyBatis + VUE + Pytorch + TensorRT + Linux + Tomcat
-**项目内容**：基于SpringBoot框架及相应技术完成木材缺陷在线检测平台的前后端系统，基于Pytorch框架和YOLOX算法完成深度学习检测系统。使用Socket端口进行Springboot与Python进行通讯。基于扩散模型的数据集生成模型、One-Stage深度学习检测工作，木材检测精度在90%以上，检测速度可达到每秒100帧。
-**项目链接**：[https://github.com/chairc/NRSD-MN-relabel](https://github.com/chairc/NRSD-MN-relabel)
+
+    **项目描述**：山东省重大科技创新工程。
+
+    **技术栈**：SpringBoot + MySQL + MyBatis + VUE + Pytorch + TensorRT + Linux + Tomcat
+
+    **项目内容**：基于SpringBoot框架及相应技术完成木材缺陷在线检测平台的前后端系统，基于Pytorch框架和YOLOX算法完成深度学习检测系统。使用Socket端口进行Springboot与Python进行通讯。基于扩散模型的数据集生成模型、One-Stage深度学习检测工作，木材检测精度在90%以上，检测速度可达到每秒100帧。
+
+    **项目链接**：[https://github.com/chairc/NRSD-MN-relabel](https://github.com/chairc/NRSD-MN-relabel)
 
 - 2023.03 - 2022.06 **GomROS社区平台** (横向项目/开发语言：Java)
-**项目描述**：该系统为B/S架构的面向使用GomROS操作系统的开发者社区，为开发者们提供一个交流、学习和协作的社区平台。
-**技术栈**：SpringBoot + MySQL + MyBatis + Shiro + VUE + Linux + Tomcat
-**项目内容**：基于SpringBoot框架及相关技术完成GomROS社区平台的开发与维护。使用Shiro安全框架进行多用户多权限设计，确保用户可以不越权访问相关事务；基于WebSocket功能实现在线聊天室的功能；Tomcat服务器在Linux部署等工作。满足基本的交流、学习与协作功能。
+
+    **项目描述**：该系统为B/S架构的面向使用GomROS操作系统的开发者社区，为开发者们提供一个交流、学习和协作的社区平台。
+
+    **技术栈**：SpringBoot + MySQL + MyBatis + Shiro + VUE + Linux + Tomcat
+
+    **项目内容**：基于SpringBoot框架及相关技术完成GomROS社区平台的开发与维护。使用Shiro安全框架进行多用户多权限设计，确保用户可以不越权访问相关事务；基于WebSocket功能实现在线聊天室的功能；Tomcat服务器在Linux部署等工作。满足基本的交流、学习与协作功能。
 
 ### 2022
 
 - 2022.12 - 2023.03 **GomROS云平台** (横向项目/开发语言：Java)
-**项目描述**：该系统为B/S架构的云平台管理系统，为机器人设备管理提供状态监控、信息收集与分析服务。
-**技术栈**：SpringBoot + MySQL + MyBatis + Shiro + VUE + Linux + Tomcat
-**项目内容**：基于SpringBoot框架及相关技术完成GomROS云平台数据采集、分析的开发与维护。通过缓冲池技术实现AGV地图的快速加载；完成可拼接SQL的自定义自动化建库与建表功能；实现机器人设备在线监控与采集功能，日均数据量在1000条；基于WebSocket的前后端通信的消息收发功能；Tomcat服务器在Linux部署等工作。
+
+    **项目描述**：该系统为B/S架构的云平台管理系统，为机器人设备管理提供状态监控、信息收集与分析服务。
+
+    **技术栈**：SpringBoot + MySQL + MyBatis + Shiro + VUE + Linux + Tomcat
+
+    **项目内容**：基于SpringBoot框架及相关技术完成GomROS云平台数据采集、分析的开发与维护。通过缓冲池技术实现AGV地图的快速加载；完成可拼接SQL的自定义自动化建库与建表功能；实现机器人设备在线监控与采集功能，日均数据量在1000条；基于WebSocket的前后端通信的消息收发功能；Tomcat服务器在Linux部署等工作。
 
 - 2022.07 - 2022.11 **消毒机器人目标检测** (横向项目/开发语言：C++、Python)
-**项目描述**：消毒机器人目标检测模块，在嵌入式设备上利用计算机视觉对门把手进行精准消杀
-**技术栈**：Pytorch + TensorRT
-**项目内容**：采用基于Pytorch代码的YOLOv5算法相关技术，开发消毒机器人目标检测模块，包括检测数据采集、标注、训练等数据处理层基本功能，并使用C++语言和TensorRT将engine模型在嵌入式设备TX2部署。实机检测下速率可达每秒60帧检测，检测精度超过97%。
+
+    **项目描述**：消毒机器人目标检测模块，在嵌入式设备上利用计算机视觉对门把手进行精准消杀
+
+    **技术栈**：Pytorch + TensorRT
+
+    **项目内容**：采用基于Pytorch代码的YOLOv5算法相关技术，开发消毒机器人目标检测模块，包括检测数据采集、标注、训练等数据处理层基本功能，并使用C++语言和TensorRT将engine模型在嵌入式设备TX2部署。实机检测下速率可达每秒60帧检测，检测精度超过97%。
 
 ## 研究方向
 
@@ -167,6 +193,6 @@ Yuan H, Hao H, Zhao Y, Zhang Y, **Chen Y**.
 
 足球，编程，健身等
 
-## 专著</h2>
+## 专著
 
 - 大数据技术及其应用研究（部分编写），周军著
