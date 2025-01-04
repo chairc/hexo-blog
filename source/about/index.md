@@ -111,38 +111,38 @@ date: 2024-11-22 14:47:46
 
 ### 2024
 
-- (**会议 SEKE 2024 Accept**) MTRNet: An Efficient Hybrid Network Model for Surface Defect Detection of Sheet Metal
-Hao H, Zhu S, **Chen Y**, et al.
+- (**会议 SEKE 2024 Accept**) MTRNet: An Efficient Hybrid Network Model for Surface Defect Detection of Sheet Metal.
+Hao H, Zhu S, <u>**Chen Y**</u>, et al.
 
-- (**会议 IEEE SMC 2024 Accept**) An Efficient Token Mixer Model for Sheet Metal Defect Detection
-Hao H, Zhu S, Yi C, **Chen Y**, et al.
+- (**会议 IEEE SMC 2024 Accept**) An Efficient Token Mixer Model for Sheet Metal Defect Detection.
+Hao H, Zhu S, Yi C, <u>**Chen Y**</u>, et al.
 
 ### 2023
 
-- AMFF-YOLOX: Towards an Attention Mechanism and Multiple Feature Fusion Based on YOLOX for Industrial Defect Detection
-**Chen Y**, Tang Y, Hao H, Zhou J, et al.
+- AMFF-YOLOX: Towards an Attention Mechanism and Multiple Feature Fusion Based on YOLOX for Industrial Defect Detection.
+<u>**Chen Y**</u>, Tang Y, Hao H, Zhou J, et al.
 Electronics, 2023, 12(7): 1662. [[**website**](https://www.mdpi.com/2079-9292/12/7/1662)] [[**pdf**](paper/AMFF-YOLOX_Towards_an_Attention_Mechanism_and_Multiple_Feature_Fusion_Based_on_YOLOX_for_Industrial_Defect_Detection.pdf)] [[**code**](https://github.com/chairc/NRSD-MN-relabel/tree/main/code)]
 
-- Novelty Detection and Fault Diagnosis Method for Bearing Faults Based on the Hybrid Deep Autoencoder Network
-Zhao Y, Hao H, **Chen Y**, et al.
+- Novelty Detection and Fault Diagnosis Method for Bearing Faults Based on the Hybrid Deep Autoencoder Network.
+Zhao Y, Hao H, <u>**Chen Y**</u>, et al.
 Electronics, 2023, 12(13): 2826. [[**website**](https://www.mdpi.com/2079-9292/12/13/2826)] [[**pdf**](paper/Novelty_Detection_and_Fault_Diagnosis_Method_for_Bearing_Faults_Based_on_the_Hybrid_Deep_Autoencoder_Network.pdf)]
 
-- Incremental Single-Class Fault Detection and Diagnosis Method for Rolling Bearings Based on OS-ELM
-Hao H, Zhao Y, **Chen Y**, et al.
+- Incremental Single-Class Fault Detection and Diagnosis Method for Rolling Bearings Based on OS-ELM.
+Hao H, Zhao Y, <u>**Chen Y**</u>, et al.
 Electronics, 2023, 12(19): 4099. [[**website**](https://www.mdpi.com/2079-9292/12/19/4099)] [[**pdf**](paper/Incremental_Single-Class_Fault_Detection_and_Diagnosis_Method_for_Rolling_Bearings_Based_on_OS-ELM.pdf)]
 
 ### 2022
 
-- Intelligent Detection Method of Gearbox Based on Adaptive Hierarchical Clustering and Subset
-Yuan H, Tang Y, Hao H, Zhao Y, Zhang Y, **Chen Y**.
+- Intelligent Detection Method of Gearbox Based on Adaptive Hierarchical Clustering and Subset.
+Yuan H, Tang Y, Hao H, Zhao Y, Zhang Y, <u>**Chen Y**</u>.
 Computational Intelligence and Neuroscience, 2022, 2022. [[**website**](https://www.hindawi.com/journals/cin/2022/6464516/)] [[**pdf**](paper/Intelligent_Detection_Method_of_Gearbox_Based_on_Adaptive_Hierarchical_Clustering_and_Subset.pdf)]
 
-- Intelligent monitoring and control system and control method of intelligent water meter
-Yuan H, Hao H, Zhao Y, Zhang Y, **Chen Y**.
+- Intelligent monitoring and control system and control method of intelligent water meter.
+Yuan H, Hao H, Zhao Y, Zhang Y, <u>**Chen Y**</u>.
 2022 IEEE 6th Advanced Information Technology, Electronic and Automation Control Conference (IAEAC). IEEE, 2022: 226-229. [[**website**](https://ieeexplore.ieee.org/document/9929669/)] [[**pdf**](paper/Intelligent_monitoring_and_control_system_and_control_method_of_intelligent_water_meter.pdf)]
 
-- Method for intelligently identifying underground safety accidents based on fully connected neural network
-Yuan H, Hao H, Zhao Y, Zhang Y, **Chen Y**.
+- Method for intelligently identifying underground safety accidents based on fully connected neural network.
+Yuan H, Hao H, Zhao Y, Zhang Y, <u>**Chen Y**</u>.
 2022 IEEE 6th Information Technology and Mechatronics Engineering Conference (ITOEC). IEEE, 2022, 6: 367-370. [[**website**](https://ieeexplore.ieee.org/document/9734567/)] [[**pdf**](paper/Method_for_intelligently_identifying_underground_safety_accidents_based_on_fully_connected_neural_network.pdf)]
 
 ## 专利
@@ -163,9 +163,9 @@ Yuan H, Hao H, Zhao Y, Zhang Y, **Chen Y**.
 
 - 用于防疫机器人的门把手消杀控制方法及系统, CN202211358411.9 (实审)
 
-## 奖励</h2>
+## 奖励
 
-### 2023</h3>
+### 2023
 
 - 2023年 齐鲁工业大学（山东省科学院）研究生学业一等奖学金 [[**pdf**](awards/2023-1.pdf)]
 
