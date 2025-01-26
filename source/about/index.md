@@ -105,7 +105,7 @@ date: 2024-11-22 14:47:46
 
 - <font color=gray>2022.01 - 2024.07：[机械工程学院](https://www.mech.sdu.edu.cn/)，[山东大学](https://www.sdu.edu.cn/)（导师：[周军](https://www.mech.sdu.edu.cn/info/1127/121116.htm)，博士生导师，联合培养）</font>
 
-- 2016.09 - 2021.07: [信息与电气工程学院](https://www.ldu.edu.cn/)，[鲁东大学](http://www.xinke.ldu.edu.cn/)
+- 2016.09 - 2021.07：[信息与电气工程学院](https://www.ldu.edu.cn/)，[鲁东大学](http://www.xinke.ldu.edu.cn/)
 
 ## 论文
 
