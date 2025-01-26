@@ -113,9 +113,11 @@ date: 2024-11-22 14:47:46
 
 - (**会议 SEKE 2024 Accept**) MTRNet: An Efficient Hybrid Network Model for Surface Defect Detection of Sheet Metal.
 Hao H, Zhu S, <u>**Chen Y**</u>, et al.
+[[**website**](https://ksiresearch.org/seke/seke24paper/paper092.pdf)] [[**pdf**](paper/MTRNet_An_Efficient_Hybrid_Network_Model_for_Surface_Defect_Detection_of_Sheet_Metal.pdf)]
 
-- (**会议 IEEE SMC 2024 Accept**) An Efficient Token Mixer Model for Sheet Metal Defect Detection.
+- An Efficient Token Mixer Model for Sheet Metal Defect Detection.
 Hao H, Zhu S, Yi C, <u>**Chen Y**</u>, et al.
+2024 IEEE International Conference on Systems, Man, and Cybernetics (SMC), Kuching, Malaysia, 2024, pp. 827-832, doi: 10.1109/SMC54092.2024.10831039. [[**website**](https://ieeexplore.ieee.org/document/10831039)] [[**pdf**](paper/An_Efficient_Token_Mixer_Model_for_Sheet_Metal_Defect_Detection.pdf)]
 
 ### 2023
 
