@@ -109,6 +109,10 @@ date: 2024-11-22 14:47:46
 
 ## 论文
 
+### 2025
+
+- (**会议 CSCWD 2025 Accept**) Interactive Medical Image Segmentation in Various Imaging Modalities: Current Status and Challenges. Wang W, Hao H and <u>**Chen Y**</u>.
+
 ### 2024
 
 - (**会议 SEKE 2024 Accept**) MTRNet: An Efficient Hybrid Network Model for Surface Defect Detection of Sheet Metal.
