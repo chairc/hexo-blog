@@ -111,6 +111,8 @@ date: 2024-11-22 14:47:46
 
 ### 2025
 
+- A novel framework designed by MMS-UNet and DK-SAC for the smart systems of the traditional Chinese medicine manufacturing. Chen Z, <u>**Chen Y**</u>, et al. Journal of Engineering Design, 2025, 1–24. [[**website**](https://www.tandfonline.com/doi/full/10.1080/09544828.2025.2473983)] [[**pdf**](paper/A_novel_framework_designed_by_MMS-UNet_and_DK-SAC_for_the_smart_systems_of_the_traditional_Chinese_medicine_manufacturing.pdf)]
+
 - (**会议 CSCWD 2025 Accept**) Interactive Medical Image Segmentation in Various Imaging Modalities: Current Status and Challenges. Wang W, Hao H and <u>**Chen Y**</u>.
 
 ### 2024
