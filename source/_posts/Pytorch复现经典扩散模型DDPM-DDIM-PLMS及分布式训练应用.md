@@ -1,5 +1,5 @@
 ---
-title: Pytorch复现经典扩散模型DDPM&DDIM&PLMS及分布式训练应用
+title: Pytorch复现经典扩散模型DDPM、DDIM、PLMS及分布式训练应用
 date: 2024-11-23 14:04:57
 hide: false
 description: 当前，生成式人工智能（AIGC）已被越来越广泛应用在工业、动漫业、设计业等诸多场景。我们都知道现阶段主流的生成模型如生成对抗网络（GAN）、自分编码器（VAE）、流模型（Flow-based Models）和扩散模型（Diffusion Models）。而扩散模型中还分为概率扩散模型，噪声条件评分网络和去噪概率模型。去噪概率模型中较为经典的就是DDPM。
@@ -10,19 +10,29 @@ tags: [扩散模型, DDPM, DDIM, Python]
 ---
 
 # 0 前言
+
 当前，生成式人工智能（AIGC）已被越来越广泛应用在工业、动漫业、设计业等诸多场景。我们都知道现阶段主流的生成模型如生成对抗网络（GAN）、自分编码器（VAE）、流模型（Flow-based Models）和扩散模型（Diffusion Models）。而扩散模型中还分为概率扩散模型，噪声条件评分网络和去噪概率模型。去噪概率模型中较为经典的就是DDPM（[**Denoising Diffusion Probabilistic Models**](https://arxiv.org/abs/2006.11239)）。
+
 **本文章和GitHub仓库，如有问题请在此仓库提交issue，如果你认为我的项目有意思请给我点一颗⭐⭐⭐Star⭐⭐⭐吧。本文持续更新**，以GitHub为准嗷~
+
 代码最新更新仓库：[https://github.com/chairc/Integrated-Design-Diffusion-Model](https://github.com/chairc/Integrated-Design-Diffusion-Model)
+
 代码最新问题总结：[https://github.com/chairc/Integrated-Design-Diffusion-Model/issues/9](https://github.com/chairc/Integrated-Design-Diffusion-Model/issues/9)
+
 访问不了问题总结可以点击CSDN链接：[https://blog.csdn.net/qq_43226466/article/details/143199474](https://blog.csdn.net/qq_43226466/article/details/143199474)
+
 **文章最新更新日期：2024年10月24日09:19:40**
 
 ![image-20241123140628143](/image-20241123140628143.png)
 
 # 1 简单原理
+
 原理应该挺多的，具体参考这个[博客](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/#forward-diffusion-process)
+
 # 2 项目结构设计
+
 **整体结构**
+
 ```yaml
 Integrated Design Diffusion Model
 ├── config
@@ -77,6 +87,7 @@ Integrated Design Diffusion Model
 │   └──web.py
 └── weight
 ```
+
 `datasets`用于存放数据集文件，自动划分标签torchvision.datasets.ImageFolder(args.dataset_path, transform=transforms)。若数据集为：
         dataset_path/class_1/image_1.jpg
         dataset_path/class_1/image_2.jpg
@@ -84,21 +95,33 @@ Integrated Design Diffusion Model
         dataset_path/class_2/image_1.jpg
         dataset_path/class_2/image_2.jpg
         ...
-其中，dataset_path是数据集所在的根目录，class_1, class_2等是数据集中的不同类别，每个类别下包含若干张图像文件。使用ImageFolder类可以方便地加载这种文件夹结构的图像数据集，并自动为每个图像分配相应的标签。可以通过传递dataset_path参数指定数据集所在的根目录，并通过其他可选参数进行图像预处理、标签转换等操作。  
+
+其中，dataset_path是数据集所在的根目录，class_1, class_2等是数据集中的不同类别，每个类别下包含若干张图像文件。使用ImageFolder类可以方便地加载这种文件夹结构的图像数据集，并自动为每个图像分配相应的标签。可以通过传递dataset_path参数指定数据集所在的根目录，并通过其他可选参数进行图像预处理、标签转换等操作。
+
 `model`是存放模型的文件夹，UNet模型和采样器模型均在其中。
+
 `results`是存放输出结果的文件夹，包括tensorboard日志、绘图和pt模型文件。
+
 `test`是进行单元测试的文件夹。
+
 `tools`是训练、生成等运行文件。
+
 `utils`是各种工具文件，例如学习率、数据加载、图像绘制与保存等。
+
 `weight`是存放预训练模型或训练较好的权重文件。
 
 # 3 代码实现
+
 代码仅为部分核心代码，代码完整版在[**github**](https://github.com/chairc/Industrial-Defect-Diffusion-Model)。
+
 注：所有的代码及注释均为英文，以下代码为源代码的中文版本。
+
 ## 3.1 训练设计
+
 扩散模型是一种对于显卡要求极高的模型。对于如何解决训练速度问题，我们使用了多机多卡训练方式，换言之就是分布式训练（未进行模型分布式，仅为数据分布式）。
 
 ### 3.1.1 分布式训练
+
 分布式训练中，一般分为主线程和其他线程。对于我们这个应用，主线程的作用是广播整个训练中的参数、指数、资源、写入保存等操作。
 
 ```bash
@@ -120,6 +143,7 @@ Integrated Design Diffusion Model
     |                        |                     |           |
     +------------------------+                     +-----------+
 ```
+
 如上图所示，在数据集初始化方面，首先DistributedSampler类将数据集读入并返回一个Sampler类，该采样器是将数据加载限制为数据集子集，换言之就是显卡平分数据集。例如有1000张图，2张GPU，那么每张GPU中的500张图片作为数据集。
 
 ```python
@@ -127,6 +151,7 @@ dataloader = DataLoader(dataset=dataset, batch_size=args.batch_size, shuffle=Fal
                                 num_workers=args.num_workers,
                                 pin_memory=True, sampler=sampler)
 ```
+
 在`train.py`启动线程，训练器会自动根据当前情况判断存在的设备数量，从而进行其它线程的开启。每个进程都会有一个rank，也就是当前的设备编号。具体实现如下：
 
 ```python
@@ -190,10 +215,15 @@ def train(rank=None, args=None):
     if distributed:
         dist.destroy_process_group()
 ```
+
 ### 3.1.2 普通训练
+
 均为正常训练方法，不开启多线程，这里不做过多讲解。
+
 ## 3.2 模型基类
+
 因为DDPM与DDIM在方法实现上相近，DDIM相较于DDPM仅在采样过程有所改变（只是增加了跳步方案，如果跳步设置为noise_steps的个数即是DDPM），所以我们在这里定义一个扩散模型基类BaseDiffusion，方便DDPM和DDIM继承相同方法与变量。
+
 ```python
 class BaseDiffusion:
     """
@@ -356,6 +386,7 @@ class Diffusion(BaseDiffusion):
 ```
 
 ## 3.4 DDIM类（改进DDPM采样器）
+
 实验表明，DDPM的每次去噪加噪过程都是从初始到结束，完成N次。而这种方法尽管生成的效果非常出色，但是带来的问题是**采样时间过长，训练速度慢**。为了解决该问题，跳步方法sample_steps被设计出来。
 
 ```python
@@ -441,7 +472,9 @@ class Diffusion(BaseDiffusion):
 ```
 
 # 4 生成结果
+
 我们在以下4个数据集做了训练，采样器为`DDPM`，图片尺寸均为`64*64`，分别是`cifar10`，`NEUDET`，`NRSD-MN`和`Animate Face`。结果如下图所示：
+
 **cifar10**
 
 ![cifar_244_ema](/cifar_244_ema.jpg)![cifar_294_ema](/cifar_294_ema.jpg)
@@ -458,21 +491,24 @@ class Diffusion(BaseDiffusion):
 
 ![animate_face_488_ema](/animate_face_488_ema.jpg)![animate_face_497_ema](/animate_face_497_ema.jpg)![animate_face_499_ema](/animate_face_499_ema.jpg)![animate_face_428_ema](/animate_face_428_ema.jpg)![animate_face_459_ema](/animate_face_459_ema.jpg)
 
-
-
 同时，我们利用生成的64× 64的模型生成了160×160的NEU-DET图像（显存占用21GB）
 
 ![neu160_0](/neu160_0.jpg)![neu160_1](/neu160_1.jpg)![neu160_2](/neu160_2.jpg)![neu160_3](/neu160_3.jpg)![neu160_4](/neu160_4.jpg)![neu160_5](/neu160_5.jpg)
 
 # 5 项目使用流程与参数设计
+
 该部分为GitHub项目的具体使用流程和使用参数设计，详情请移步[README.md](https://github.com/chairc/Industrial-Defect-Diffusion-Model/blob/main/README.md)
+
 ## 5.1 环境检查
+
 首先，你需要检查当前Anaconda或Miniconda中的环境是否符合本项目运行。
 
 ## 5.2 训练
+
 #### 注意
 
 本自README的训练GPU环境如下：使用具有6GB显存的NVIDIA RTX 3060显卡、具有11GB显存的NVIDIA RTX 2080Ti显卡和具有24GB（总计48GB，分布式训练）显存的NVIDIA RTX 6000（×2）显卡对模型进行训练和测试。**上述GPU均可正常训练**。
+
 #### 5.2.1 开始你的第一个训练（以cifar10为例，模式单卡，有条件训练）
 
 1. **导入数据集** 
@@ -532,6 +568,7 @@ class Diffusion(BaseDiffusion):
 2. 打开`train.py`文件，找到`--dataset_path`参数，将参数中的路径修改为数据集的总路径，例如`/your/path/datasets/landscape`
 
 3. 设置必要参数，例如`--sample`，`--conditional`，`--run_name`，`--epochs`，`--batch_size`，`--image_size`，`--result_path`等参数，若不设置参数则使用默认设置。我们有两种参数设置方法，其一是直接对`train.py`文件`if __name__ == "__main__":`中的`parser`进行设置（**我们推荐这种方式**）；其二是在控制台在`/your/path/Defect-Diffiusion-Model/tools`路径下输入以下命令：
+   
    **有条件训练命令**
 
    ```bash
@@ -547,6 +584,7 @@ class Diffusion(BaseDiffusion):
 4. 等待训练即可
 
 5. 若因异常原因中断训练，我们可以在`train.py`文件，首先将`--resume`设置为`True`，其次设置异常中断的迭代编号，再写入该次训练的所在文件夹（run_name），最后运行文件即可。也可以使用如下命令进行恢复：
+   
    **有条件恢复训练命令**
 
    ```bash
@@ -558,6 +596,7 @@ class Diffusion(BaseDiffusion):
    # 此处为不输入--start_epoch参数，默认使用last权重
    python train.py --resume --sample ddpm --conditional --run_name df --epochs 300 --batch_size 16 --image_size 64 --num_classes 10 --dataset_path /your/dataset/path --result_path /your/save/path
    ```
+   
    **无条件恢复训练命令**
 
    ```bash
@@ -570,6 +609,7 @@ class Diffusion(BaseDiffusion):
    ```
 
 6. 预训练模型在每次大版本[Release](https://github.com/chairc/Integrated-Design-Diffusion-Model/releases)中发布，请留意。预训练模型使用方法如下，首先将对应`network`、`image_size`、`act`等相同参数的模型下到本地任意文件夹下。直接调整`train.py`中`--pretrain`和`--pretrain_path`即可。也可以使用如下命令进行预训练：  
+   
    **使用有条件预训练模型训练命令**
 
    ```bash
@@ -643,14 +683,12 @@ python train.py --sample ddpm --run_name df --epochs 300 --batch_size 16 --image
 | --num_classes                |    是    | 类别个数                         |   int    | 类别个数，用于区分类别                                       |
 | --cfg_scale                  |    是    | classifier-free guidance插值权重 |   int    | classifier-free guidance插值权重，用户更好生成模型效果       |
 
-
-
-
 ## 5.3 生成
 
 1. 打开`generate.py`文件，找到`--weight_path`参数，将参数中的路径修改为模型权重路径，例如`/your/path/weight/model.pt`
 
 2. 设置必要参数，例如`--conditional`，`--generate_name`，`--num_images`，`--num_classes`，`--class_name`，`--image_size`，`--result_path`等参数，若不设置参数则使用默认设置。我们有两种参数设置方法，其一是直接对`generate.py`文件`if __name__ == "__main__":`中的`parser`进行设置；其二是在控制台在`/your/path/Defect-Diffiusion-Model/tools`路径下输入以下命令：
+    
     **有条件生成命令（1.1.1版本以上）**
 
    ```bash
@@ -676,10 +714,6 @@ python train.py --sample ddpm --run_name df --epochs 300 --batch_size 16 --image
 
 3. 等待生成即可
 
-
-
-**参数讲解**
-
 **参数讲解**
 
 | **参数名称**    | 条件参数 | 参数使用方法                     | 参数类型 | 参数解释                                                     |
@@ -700,6 +734,7 @@ python train.py --sample ddpm --run_name df --epochs 300 --batch_size 16 --image
 
 
 # 6 当前已完成工作
+
 - [x] 新增cosine学习率优化（2023-07-31）
 - [x] 使用效果更优的U-Net网络模型（2023-11-09）
 - [x] 更大尺寸的生成图像（2023-11-09）
@@ -713,11 +748,11 @@ python train.py --sample ddpm --run_name df --epochs 300 --batch_size 16 --image
 - [x] 增加PLMS采样方法（2024-03-12）
 - [x] 增加FID方法验证图像质量（2024-05-06）
 - [x] 增加生成图像Socket和网站服务部署（2024-11-13）
+
 # 7 下一步计划
 
 - [ ] 使用Latent方式降低显存消耗
 - [ ] 增加Docker部署
 - [ ] 增加PSNR和SSIM方法验证超分图像质
-
 
 如有任何问题，请到Github提交issue或联系我email：chenyu1998424@gmail.com

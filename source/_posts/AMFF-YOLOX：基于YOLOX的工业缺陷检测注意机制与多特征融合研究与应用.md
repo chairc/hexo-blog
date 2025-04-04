@@ -16,7 +16,9 @@ math: true
 本文将根据现有技术与存在问题，进行工业缺陷检测的应用研究。包括[原文](https://www.mdpi.com/2079-9292/12/7/1662)、实现过程与代码，详细的代码请访问我的[GitHub](https://github.com/chairc/NRSD-MN-relabel)，如有问题可在评论区提出问题或在[此链接](https://github.com/chairc/NRSD-MN-relabel/issues)提出Issue。
 
 # 1 网络整体结构
+
 ## 1.1 网络总览
+
 YOLOX有6种不同的型号： YOLOX-nano、YOLOX-tinty、YOLOX-s、YOLOX-m、YOLOX-l和YOLOX-x。它使用CSP-Darknet和空间金字塔池（SPP）作为主干网络结构，路径聚合网络（PANet）作为网络的颈部部分，头部使用与上一代YOLO系列不同的解耦头部。
 
 本文将选取YOLOX-s模型作为基准模型，如下图所示，本文改进了YOLOX的整体结构。改进后的网络结构分为主干网络、特征提取网络和检测网络。改进后的特征提取网络（蓝色部分）由主干网络注意提取层（红色部分）、带有注意模块的多尺度特征层和自适应空间特征融合层（紫色部分）组成。该编码器由底层主干网络和特征提取网络组成，检测解码器由三个解耦的检测头（绿色部分）组成。
@@ -24,7 +26,9 @@ YOLOX有6种不同的型号： YOLOX-nano、YOLOX-tinty、YOLOX-s、YOLOX-m、YO
 ![网络总览](/52087f507d3d1fedc485d676c977a4ed.png)
 
 ## 1.2 网络改进
+
 ### 1.2.1 特征提取网络PANet的改进
+
 为了更好地关注工业缺陷，本文在主干网络的后三层和PANet的CSP层的输出位置添加了一个ECA（Efficient channel attention）模块，如下图所示。使用ECA模块并没有给模型添加太多的参数。同时，对不同特征映射的相关度分配加权系数，从而发挥强化重要特征的作用。本文在PANet后加入了自适应空间特征融合技术。它对特征提取网络后三层的三尺度特征信息输出进行加权和求和，以增强特征尺度的不变性。
 
 ![特征提取网络PANet的改进](/f1b7a0b820ebde76f84e51790586823f.png)
@@ -206,6 +210,7 @@ class YOLOPAFPN(nn.Module):
 ```
 
 ### 1.2.2 注意力模块
+
 ECA（Efficient channel attention）是一种轻量级的注意机制，它简单、有效，易于集成到现有的网络中，而不需要降维。使用一维卷积可以有效地捕获局部跨通道交互来提取通道间的依赖关系，允许在不向网络添加更多参数的情况下增强聚焦特征。为了使网络每次都能学习到所需的特征，本文在改进后的模型中添加了一个ECA模块，如下图所示。每个注意力组由一个CSP（Cross-Stage Partial ）层、一个ECA模块和一个基本卷积块组成。CSP层增强了整个网络学习特征的能力，并将特征提取的结果传递到ECA模块中。ECA模块的第一步是对传入的特征映射执行平均池化操作。第二步使用核为3的一维卷积来计算结果。第三步，应用上述结果，利用Sigmoid激活函数获得每个通道的权值。第四步，将权值与原始输入特征图的对应元素相乘，得到最终的输出特征图。最后，将结果输出到后续的基卷积块或单独输出。
 
 ![ECA注意力模块](/50bf64ea6e7d119de8bc7a3789b58224.png)
@@ -239,10 +244,10 @@ class ECA(nn.Module):
 ```
 
 ### 1.2.3 基于注意力模块的自适应特征融合
+
 Liu等人（ 论文Learning spatial fusion for single-shot object detection）为了解决多尺度特征之间的不一致性问题，提出了自适应空间特征融合的方法。它使网络能够直接学习如何在其他层次上对特征进行空间过滤，以便只保留有用的信息用于组合。如下图所示，本文通过保留三种不同尺度的特征图的ECA模块的最终输出来进行特征提取层。自适应空间特征融合机制对这三个特征图尺度在20×20、40×40和80×80的不同尺度下的特征图信息进行权值和求和，并计算出相应的权值。
 
 ![基于注意力模块的自适应特征融合](/cd77e94e4bb8dc1ce7b18b82e552f69d.png)
-
 
 公式（1）中$X^{eca1\rightarrow{level}}_{ij}$、$X^{eca2\rightarrow{level}}_{ij}$和$X^{eca3\rightarrow{level}}_{ij}$ 分别代表了PANet的三个注意力机制（上图中的ECA-1、ECA-2和ECA-3）的特征信息。本文将上述特征信息与权重参数$\alpha^{level}_{ij}$、$\beta^{level}_{ij}$ 和 $\gamma^{level}_{ij}$ （例如：$\alpha$、$\beta$和$\gamma$在位置 $(i, j)$ 的通道中共享的权重参数）调整到相同大小的特征图，然后将它们进行叠加操作形成一个新的融合层。
 
@@ -255,7 +260,6 @@ $$(2)\    \alpha^{level}_{ij} + \beta^{level}_{ij} + \gamma^{level}_{ij} = 1 $$
 $$(3)\    \alpha^{level}_{ij}, \beta^{level}_{ij}, \gamma^{level}_{ij} \in [0, 1] $$
 
 $$(4)\    \theta^{level}_{ij} = \frac{e^{\lambda^{level}_{\theta_{ij}}}}{e^{\lambda^{level}_{\alpha_{ij}}} + e^{\lambda^{level}_{\beta_{ij}}} + e^{\lambda^{level}_{\gamma_{ij}}}}, \theta \in [\alpha, \beta, \gamma] $$
-
 
 **该部分实现代码如下**：
 
@@ -393,22 +397,29 @@ class ASFF(nn.Module):
 ```
 
 ### 1.2.4 Bottleneck优化设计
+
 CouvNeXt网络是由Liu等人（论文A convnet for the 2020s）的研究提出的。对大型卷积核采用逆瓶颈结构，并采用较少的归一化和激活函数来提高模型性能。基于这一思想，本文中的模型在每个CSP层中都进行了微观的瓶颈设计，并尝试采用逆瓶颈结构。然而，结果与原始结果相似，且效果没有明显改善，因此本文没有采用逆瓶颈结构。最后，本文基于CSP-Darknet模型，提出了ConvNeXt的瓶颈设计模式。在模型1×1卷积后去掉一个SiLU激活函数，在3×3卷积后删除一个归一化函数，如下图所示。通过对简化的归一化操作和激活函数操作分别进行测试，发现最终结果优于原始结构。
 
 ![改进的Bottleneck](/493cec1dfb927e7bf4059cce13f5ba66.png)
 
 # 2 实验效果
+
 ## 2.1 数据集
+
 以下是我们实验中使用的公共数据集： [NRSD-MN](https://github.com/zdfcvsn/MCnet)（重新标记的数据集链接：[NRSD-MN-relabel](https://drive.google.com/drive/folders/13r-l_OEUt63A8K-ol6jQiaKNuGdseZ7j?usp=sharing)）、[PCB](https://robotics.pkusz.edu.cn/resources/dataset/)和[NEU-DET](http://faculty.neu.edu.cn/songkechen/zh_CN/zdylm/263270/list/)。NRSD-MN数据集共有1个类别中的4101张图像，图像大小从400到800像素不等。实验共分为2971个训练集和1130个验证集。PCB数据集共有6个类别中的693张图像，它们的大小都大于1000像素。这6个类别分别是 missing hole、mouse bite、open circuit、short、spur和spurious copper。实验中分为554个训练集和139个验证集。NEU-DET数据集由1800张图像组成，其中6种缺陷被标记为crazing、inclusion、patches、 pitted surface、 rolled in scale和scratches。此外，图像大小为200×200像素。实验中分为1620个训练集和180个验证集。所有的验证集都来自于数据集自己的划分。
+
 ## 2.2 实验环境
+
 本文的实验环境如下： Ubuntu 18.04、Python 3.8、Pytorch 1.8.1、CUDA 11.1，所有模型都使用相同的NVIDIA RTX 3060GPU 12GB。具体的实验参数可以参考文章或源代码。
 
 ## 2.3 实验结果
 
 ### 2.3.1 对比实验
+
 在本研究中，我们设计了一组比较实验和四组消融实验，以mAP@0.5：0.95、mAP@0.5和FPS作为评价指标并以YOLOX为基线。在工业缺陷检测对比实验中，将YOLOX-tiny和YOLOX-s作为基本模型，并与YOLOv3-tiny、YOLOv5-s和YOLOv8-s进行了比较。在实验结果的对比图中，(a)表示图像的真实值，(b)表示基线的预测结果，(c)表示本文模型的预测结果。**详细分析可参考论文实验部分**。
 
 **工业缺陷数据集检测的比较实验结果（mAP@0.5：0.95）**
+
 |   Network    | NRSD(mAP@0.5:0.95) | PCB(mAP@0.5:0.95) | NEU(mAP@0.5:0.95) |
 | :----------: | :----------------: | :---------------: | :---------------: |
 | YOLOv3-tiny  |       46.29        |       42.48       |       21.32       |
@@ -419,6 +430,7 @@ CouvNeXt网络是由Liu等人（论文A convnet for the 2020s）的研究提出�
 | AMFF-YOLOX-s |     **61.06**      |     **51.58**     |     **49.08** 
 
 **工业缺陷数据集检测的比较实验结果（mAP@0.5）**
+
 |   Network    | NRSD(mAP@0.5) | PCB(mAP@0.5) | NEU(mAP@0.5) |
 | :----------: | :-----------: | :----------: | :----------: |
 | YOLOv3-tiny  |     78.26     |    90.69     |    55.02     |
@@ -429,18 +441,23 @@ CouvNeXt网络是由Liu等人（论文A convnet for the 2020s）的研究提出�
 | AMFF-YOLOX-s |   **85.00**   |    91.09     |  **80.48**   |
 
 **NRSD对比结果**
+
 ![NRSD对比结果](/b5447f80f66164bddfea103ca7750a42.png)
 
 **PCB对比结果**
+
 ![PCB对比结果](/e5ca9f7240813aa17af8383218904b64.png)
 
 **NEU-DET对比结果**
+
 ![NEU-DET对比结果](/d727ece336c30bd11d3df5fa0624271e.png)
 
 ### 2.3.2 消融实验
+
 为了验证模型各模块的有效性，本文首先在经典的VOC数据集中进行了烧蚀实验。该实验以YOLOX-tiny为基线，将输入大小设置为416×416，其他训练设置与基本设置相同，如下表所示。我们分别将其添加到YOLOX-tiny的FPN和PAN的不同位置的注意机制。在消融实验表中，本实验使用A作为ECA模块，B作为ASFF模块，C作为修改后的Bottleneck模块。**详细分析可参考论文实验部分**。
 
 **在VOC2007数据集上的消融实验结果**
+
 |       Network       | VOC(mAP@0.5:0.95) | VOC(mAP@0.5) |   FPS   |
 | :-----------------: | :---------------: | :----------: | :-----: |
 |      Baseline       |       35.85       |    59.49     | **340** |
@@ -451,6 +468,7 @@ CouvNeXt网络是由Liu等人（论文A convnet for the 2020s）的研究提出�
 | + A (FPN + PAN) + B |     **37.41**     |  **61.06**   |   298   |
 
 **在NRSD数据集上的消融实验结果**
+
 |   Network   | NRSD(mAP@0.5:0.95) | NRSD(mAP@0.5) |   FPS   |
 | :---------: | :----------------: | :-----------: | :-----: |
 |  Baseline   |       58.27        |     81.89     |   144   |
@@ -460,6 +478,7 @@ CouvNeXt网络是由Liu等人（论文A convnet for the 2020s）的研究提出�
 | + A + B + C |     **61.06**      |   **85.00**   |   129   |
 
 **在PCB数据集上的消融实验结果**
+
 |   Network   | PCB(mAP@0.5:0.95) | PCB(mAP@0.5) |   FPS   |
 | :---------: | :---------------: | :----------: | :-----: |
 |  Baseline   |       49.72       |    89.51     |   144   |
@@ -469,6 +488,7 @@ CouvNeXt网络是由Liu等人（论文A convnet for the 2020s）的研究提出�
 | + A + B + C |     **51.58**     |  **91.09**   |   125   |
 
 **在NEU-DET数据集上的消融实验结果**
+
 |   Network   | NEU(mAP@0.5:0.95) | NEU(mAP@0.5) |   FPS   |
 | :---------: | :---------------: | :----------: | :-----: |
 |  Baseline   |       47.61       |    78.49     | **153** |
@@ -478,6 +498,7 @@ CouvNeXt网络是由Liu等人（论文A convnet for the 2020s）的研究提出�
 | + A + B + C |     **49.08**     |  **80.48**   |   131   |
 
 # 3 最后
+
 在本文中我们提出了一种改进的工业缺陷检测网络AMFF-YOLOX，该网络结合了注意机制、自适应空间特征融合和改进的瓶颈模块，以在不牺牲太多速度的情况下提高缺陷检测的准确性。通过大量的消融实验和与现有的最先进的方法的比较，验证了该模型的整体有效性和竞争力。
 
 如果有任何关于结构、代码调参、项目部署、数据集等相关问题欢迎访问我的[GitHub](https://github.com/chairc)或给我发邮件（chenyu1998424@gmail.com）。
