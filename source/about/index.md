@@ -6,7 +6,7 @@ date: 2024-11-22 14:47:46
 
 <head><base target="_blank"></head>
 
-## 关于我——陈宇（chairc）
+## 关于我——chairc
 
 ### 研发工程师，硕士，开源作者
 
@@ -14,7 +14,7 @@ date: 2024-11-22 14:47:46
 
 **曾学习于**：算力互联网与信息安全教育部重点实验室，[山东省计算中心](http://www.scsc.cn/)（[国家超级计算济南中心](https://www.nsccjn.cn/)），[齐鲁工业大学（山东省科学院）](https://www.qlu.edu.cn/)
 
-**担任审稿人**：The Journal of Supercomputing、Pattern Analysis and Applications、Journal of Real-Time Image Processing
+**担任审稿人**：Biomedical Signal Processing and Control、The Journal of Supercomputing、Pattern Analysis and Applications、Journal of Real-Time Image Processing
 
 **电子邮箱**：chenyu1998424 [at] gmail [dot] com / chairc1998 [at] 163 [dot] com
 
@@ -26,36 +26,45 @@ date: 2024-11-22 14:47:46
 
 ## 项目经历
 
+### 2025
+- 2025.01 - 至今 **AI通用平台**
+
+    **项目描述**：该系统为多AI集成平台。
+
+    **技术栈**：Paddle + dify + ollama + docker + fastapi
+
+    **项目内容**：该平台正在研发测试中。
+
 ### 2024
-- 2024.11 - 至今 **AI保函在线识别** (开发语言：Python)
+- 2024.11 - 2025.03 **AI保函在线识别** (开发语言：Python)
 
     **项目描述**：该系统为网络AI保函在线识别模型。
 
     **技术栈**：Paddle + fastapi
 
-    **项目内容**：采用PaddleOCR与PaddleNLP的KIE匹配技术对海铁保函的关键信息进行提取与识别，提取准确率在97%以上。使用fastapi进行接口访问，日均访问量40+。
+    **项目内容**：采用PaddleOCR与PaddleNLP的KIE匹配技术对海铁保函的关键信息进行提取与识别，提取准确率在98%以上。使用fastapi进行接口访问，日均访问量40+。
 
 ### 2023
 
-- 2023.06 - 至今 **IDDM分布式缺陷生成模型** (横向项目/开发语言：Python)
+- 2023.06 - 至今 **IDDM分布式集成扩散生成模型** (横向项目/开发语言：Python)
 
     **项目描述**：该系统为开源分布式深度学习图像生成模型（AIGC）。
 
     **技术栈**：Pytorch + 分布式
 
-    **项目内容**：IDDM分布式缺陷生成模型根据DDPM和DDIM算法提供无重复的工业缺陷图像。模型采用DDP分布式训练技术对在6张RTX6000显卡进行通讯，实现大显存多显卡训练。
+    **项目内容**：IDDM分布式集成扩散生成模型根据DDPM和DDIM算法提供无重复的工业、风景、动漫、频谱图等二维图像。模型采用DDP分布式训练技术对在N张NVIDIA显卡进行通讯，实现大显存多显卡训练。
 
-    **项目链接**：[https://github.com/chairc/Industrial-Defect-Diffusion-Model](https://github.com/chairc/Industrial-Defect-Diffusion-Model)
+    **项目链接**：[https://github.com/chairc/Integrated-Design-Diffusion-Model](https://github.com/chairc/Integrated-Design-Diffusion-Model)
 
-- 2023.06 - 2024.06 **木材缺陷在线检测平台** (横向项目/开发语言：Java、Python)
+- 2023.06 - 2024.06 **AMFF-YOLOX木材缺陷在线检测平台** (横向项目/开发语言：Java、Python)
 
     **项目描述**：山东省重大科技创新工程。
 
     **技术栈**：SpringBoot + MySQL + MyBatis + VUE + Pytorch + TensorRT + Linux + Tomcat
 
-    **项目内容**：基于SpringBoot框架及相应技术完成木材缺陷在线检测平台的前后端系统，基于Pytorch框架和YOLOX算法完成深度学习检测系统。使用Socket端口进行Springboot与Python进行通讯。基于扩散模型的数据集生成模型、One-Stage深度学习检测工作，木材检测精度在90%以上，检测速度可达到每秒100帧。
+    **项目内容**：基于SpringBoot框架及相应技术完成木材缺陷在线检测平台的前后端系统，基于Pytorch框架和YOLOX算法完成深度学习检测系统，提出一种新型的AMFF-YOLOX检测算法。使用Socket端口进行Springboot与Python进行通讯。基于扩散模型的数据集生成模型、One-Stage深度学习检测工作，木材检测精度在90%以上，检测速度可达到每秒100帧。
 
-    **项目链接**：[https://github.com/chairc/NRSD-MN-relabel](https://github.com/chairc/NRSD-MN-relabel)
+    **项目链接**：[https://github.com/chairc/AMFF-YOLOX](https://github.com/chairc/AMFF-YOLOX)
 
 - 2023.03 - 2022.06 **GomROS社区平台** (横向项目/开发语言：Java)
 
